@@ -42,7 +42,8 @@ gumbo parser library.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-./Build install
+DESTDIR=$RPM_BUILD_ROOT \
+	./Build install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
