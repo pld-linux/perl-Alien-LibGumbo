@@ -1,5 +1,6 @@
 # TODO:
 # - make it use gumbo-parser-devel
+# - https://github.com/ruz/Alien-LibGumbo/issues/2
 #
 # Conditional build:
 %bcond_without	tests		# do not perform "make test"
@@ -10,7 +11,7 @@
 Summary:	gumbo parser library
 Name:		perl-Alien-LibGumbo
 Version:	0.02
-Release:	0.1
+Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
@@ -22,7 +23,6 @@ BuildRequires:	perl-Alien-Base
 BuildRequires:	perl-Module-Build
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
-BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,8 +33,8 @@ gumbo parser library.
 
 %build
 %{__perl} Build.PL \
-	destdir=$RPM_BUILD_ROOT \
-	installdirs=vendor
+	installdirs=vendor \
+	create_packlist=0
 ./Build
 
 %{?with_tests:./Build test}
@@ -42,8 +42,8 @@ gumbo parser library.
 %install
 rm -rf $RPM_BUILD_ROOT
 
-DESTDIR=$RPM_BUILD_ROOT \
-	./Build install
+./Build install \
+	destdir=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -52,4 +52,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{perl_vendorlib}/Alien/*.pm
 %{perl_vendorlib}/Alien/LibGumbo
+%dir %{perl_vendorlib}/auto/share/dist/Alien-LibGumbo
+%{perl_vendorlib}/auto/share/dist/Alien-LibGumbo/include
+%dir %{perl_vendorlib}/auto/share/dist/Alien-LibGumbo/lib
+# see TODO
+%attr(755,root,root) %{perl_vendorlib}/auto/share/dist/Alien-LibGumbo/lib/libgumbo.so*
+%{perl_vendorlib}/auto/share/dist/Alien-LibGumbo/lib/pkgconfig
 %{_mandir}/man3/*
