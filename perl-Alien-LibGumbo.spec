@@ -23,6 +23,7 @@ BuildRequires:	perl-Alien-Base
 BuildRequires:	perl-Module-Build
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,6 +51,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#%{perl_vendorlib}/Alien/*.pm
-#%{perl_vendorlib}/Alien/LibGumbo
-#%{_mandir}/man3/*
+%{perl_vendorlib}/Alien/*.pm
+%{perl_vendorlib}/Alien/LibGumbo
+%{_mandir}/man3/*
