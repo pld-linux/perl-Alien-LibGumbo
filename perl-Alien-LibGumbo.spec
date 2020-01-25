@@ -7,7 +7,6 @@
 #
 %define		pdir	Alien
 %define		pnam	LibGumbo
-%include	/usr/lib/rpm/macros.perl
 Summary:	gumbo parser library
 Name:		perl-Alien-LibGumbo
 Version:	0.05
